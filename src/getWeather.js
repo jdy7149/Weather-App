@@ -63,8 +63,9 @@ export default async (loca) => {
 
     const data = await response.json();
 
-    console.log(processWeatherData(data));
+    return processWeatherData(data);
   } catch (error) {
     console.log(error.message);
+    return {};
   }
 };

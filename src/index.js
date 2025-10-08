@@ -1,6 +1,12 @@
 import "./reset.css";
 import "./styles.css";
 
-import getWeather from "./getWeather";
+import populateContent, { searchInput, searchBtn } from "./populateContent";
 
-getWeather("london");
+searchBtn.addEventListener("click", () => {
+  const loca = searchInput.value;
+
+  populateContent(loca);
+
+  searchInput.value = "";
+});
