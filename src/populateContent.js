@@ -1,48 +1,135 @@
+import { format } from "date-fns";
+
 import getWeather from "./getWeather";
 
 export const searchInput = document.querySelector("#location");
 export const searchBtn = document.querySelector("#search");
 const contentDiv = document.querySelector(".content");
 
-const getCurrentConditionsCard = (address, currentConditions) => {
-  const card = document.createElement("div");
+const getCurrentConditionsContainer = ({ address, current }) => {
+  const containerDiv = document.createElement("div");
+  containerDiv.classList.add("current");
 
   const addressPara = document.createElement("p");
+  addressPara.classList.add("address");
   addressPara.textContent = address;
 
   const tempPara = document.createElement("p");
-  tempPara.textContent = currentConditions.temp;
+  tempPara.classList.add("temp");
+  tempPara.textContent = current.temp;
 
-  import(`./icons/${currentConditions.icon}.svg`).then((icon) => {
+  const iconPara = document.createElement("p");
+  iconPara.classList.add("icon");
+
+  import(`./icons/${current.icon}.svg`).then((iconData) => {
     const iconImg = document.createElement("img");
-    iconImg.src = icon.default;
+    iconImg.src = iconData.default;
     iconImg.alt = "Weather Icon";
-    tempPara.appendChild(iconImg);
+    iconPara.appendChild(iconImg);
   });
 
   const conditionsPara = document.createElement("p");
-  conditionsPara.textContent = currentConditions.conditions;
+  conditionsPara.classList.add("conditions");
+  conditionsPara.textContent = current.conditions;
 
   const feelslikePara = document.createElement("p");
-  feelslikePara.textContent = `Feels like: ${currentConditions.feelslike}`;
+  feelslikePara.classList.add("feelslike");
+  feelslikePara.textContent = `Feels like: ${current.feelslike}`;
 
   const humidityPara = document.createElement("p");
-  humidityPara.textContent = currentConditions.humidity;
+  humidityPara.classList.add("humidity");
+  humidityPara.textContent = current.humidity;
 
-  card.append(
+  containerDiv.append(
     addressPara,
     tempPara,
+    iconPara,
     conditionsPara,
     feelslikePara,
     humidityPara,
   );
 
-  return card;
+  return containerDiv;
 };
 
-const getHoursForecastCard = (todayHours, tomorrowHours) => {};
+const getHoursForecastCard = ({ hours }) => {
+  const containerDiv = document.createElement("div");
+  containerDiv.classList.add("hours-forecast");
 
-const getWeekForecastCard = (week) => {};
+  hours.forEach(({ datetime, icon, temp, humidity }) => {
+    const card = document.createElement("div");
+    card.classList.add("hours-forecast-card");
+
+    const datetimePara = document.createElement("p");
+    datetimePara.classList.add("datetime");
+    datetimePara.textContent = datetime;
+
+    const iconPara = document.createElement("p");
+    iconPara.classList.add("icon");
+
+    import(`./icons/${icon}.svg`).then((iconData) => {
+      const iconImg = document.createElement("img");
+      iconImg.src = iconData.default;
+      iconImg.alt = "Weather Icon";
+      iconPara.appendChild(iconImg);
+    });
+
+    const tempPara = document.createElement("p");
+    tempPara.classList.add("temp");
+    tempPara.textContent = temp;
+
+    const humidityPara = document.createElement("p");
+    humidityPara.classList.add("humidity");
+    humidityPara.textContent = humidity;
+
+    card.append(datetimePara, iconPara, tempPara, humidityPara);
+
+    containerDiv.appendChild(card);
+  });
+
+  return containerDiv;
+};
+
+const getWeekForecastContainer = ({ week }) => {
+  const containerDiv = document.createElement("div");
+  containerDiv.classList.add("week-forecast");
+
+  week.forEach(({ datetime, humidity, icon, tempmax, tempmin }) => {
+    const card = document.createElement("div");
+    card.classList.add("week-forecast-card");
+
+    const datetimePara = document.createElement("p");
+    datetimePara.classList.add("datetime");
+    datetimePara.textContent = format(datetime, "EEEE"); 
+
+    const humidityPara = document.createElement("p");
+    humidityPara.classList.add("humidity");
+    humidityPara.textContent = humidity;
+
+    const iconPara = document.createElement("p");
+    iconPara.classList.add("icon");
+
+    import(`./icons/${icon}.svg`).then((iconData) => {
+      const iconImg = document.createElement("img");
+      iconImg.src = iconData.default;
+      iconImg.alt = "Weather Icon";
+      iconPara.append(iconImg);
+    });
+
+    const tempmaxPara = document.createElement("p");
+    tempmaxPara.classList.add("tempmax");
+    tempmaxPara.textContent = tempmax;
+
+    const tempminPara = document.createElement("p");
+    tempminPara.classList.add("tempmin");
+    tempminPara.textContent = tempmin;
+
+    card.append(datetimePara, humidityPara, iconPara, tempmaxPara, tempminPara);
+    containerDiv.appendChild(card);
+  });
+
+  return containerDiv;
+};
 
 export default async (loca) => {
   try {
@@ -50,15 +137,9 @@ export default async (loca) => {
 
     console.log({ data });
 
-    const currentConditionsCard = getCurrentConditionsCard(
-      data.address,
-      data.current,
-    );
-    const hoursForecastCard = getHoursForecastCard(
-      data.todayHours,
-      data.tomorrowHours,
-    );
-    const weekForecastCard = getWeekForecastCard(data.week);
+    const currentConditionsCard = getCurrentConditionsContainer(data);
+    const hoursForecastCard = getHoursForecastCard(data);
+    const weekForecastCard = getWeekForecastContainer(data);
 
     contentDiv.replaceChildren(
       currentConditionsCard,
