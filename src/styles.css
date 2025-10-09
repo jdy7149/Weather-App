@@ -1,0 +1,41 @@
+.hours-forecast {
+  display: flex;
+  gap: 1rem;
+}
+
+.hours-forecast-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hours-forecast-card .icon img {
+  width: 40px;
+  height: 40px;
+}
+
+.week-forecast {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.week-forecast-card {
+  flex: 1 1 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.week-forecast-card .icon img {
+  width: 40px;
+  height: 40px;
+}
+
+.week-forecast-card .tempmax {
+  font-weight: bold;
+}
+
+.week-forecast-card .tempmin {
+  opacity: 0.7;
+}
