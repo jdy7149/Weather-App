@@ -1,3 +1,5 @@
+import { format, compareAsc } from "date-fns";
+
 const processCurrentConditions = ({
   conditions,
   feelslike,
@@ -18,6 +20,20 @@ const processHourData = ({ datetime, humidity, icon, temp }) => ({
   icon,
   temp,
 });
+
+const getUpcoming24Hours = (todayHours, tomorrowHours) => {
+  const now = new Date();
+
+  const processedTodayHours = todayHours.filter(
+    ({ datetime }) => compareAsc(datetime, format(now, "HH:mm:ss")) >= 0,
+  );
+  const processedTomorrowHours = tomorrowHours.slice(
+    0,
+    24 - processedTodayHours.length,
+  );
+
+  return [...processedTodayHours, ...processedTomorrowHours];
+};
 
 const processDailyData = ({
   datetime,
@@ -44,11 +60,13 @@ const processWeatherData = ({ address, currentConditions, days }) => {
 
   const tomorrowHours = days[1].hours.map(processHourData);
 
+  const hours = getUpcoming24Hours(todayHours, tomorrowHours);
+
   return {
     address,
     current,
     week,
-    todayHours,
+    hours,
     tomorrowHours,
   };
 };
@@ -62,6 +80,8 @@ export default async (loca) => {
     if (!response.ok) throw new Error(`Status code: ${response.status}`);
 
     const data = await response.json();
+
+    console.log(data);
 
     return processWeatherData(data);
   } catch (error) {
