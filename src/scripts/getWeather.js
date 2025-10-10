@@ -21,7 +21,7 @@ const processHourData = ({ datetime, humidity, icon, temp }) => ({
   temp,
 });
 
-const getUpcoming24Hours = (todayHours, tomorrowHours) => {
+const getNext24Hours = (todayHours, tomorrowHours) => {
   const now = new Date();
 
   const processedTodayHours = todayHours.filter(
@@ -60,7 +60,7 @@ const processWeatherData = ({ address, currentConditions, days }) => {
 
   const tomorrowHours = days[1].hours.map(processHourData);
 
-  const hours = getUpcoming24Hours(todayHours, tomorrowHours);
+  const hours = getNext24Hours(todayHours, tomorrowHours);
 
   return {
     address,
@@ -76,7 +76,10 @@ export default async (loca) => {
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${loca}?unitGroup=metric&key=W3MXMLU37J4EAJ5YRBBSGPPAZ&contentType=json`,
   );
 
-  if (!response.ok) throw new Error(`Status code: ${response.status}`);
+  if (!response.ok) {
+    const msg = await response.text();
+    throw new Error(msg);
+  }
 
   const data = await response.json();
 
