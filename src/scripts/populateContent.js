@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 
-import waterPercent from '../icons/water-percent.svg';
-import mapMarker from '../icons/map-marker.svg';
+import waterPercent from "../icons/water-percent.svg";
+import mapMarker from "../icons/map-marker.svg";
 
 import getWeather from "./getWeather";
 
@@ -16,11 +16,11 @@ const getCurrentConditionsContainer = ({ address, current }) => {
   const addressPara = document.createElement("p");
   addressPara.classList.add("address");
 
-  const locationIcon = document.createElement('img');
+  const locationIcon = document.createElement("img");
   locationIcon.src = mapMarker;
-  locationIcon.alt = 'Location Icon';
+  locationIcon.alt = "Location Icon";
 
-  const addressText = document.createElement('span');
+  const addressText = document.createElement("span");
   addressText.textContent = address.at(0).toUpperCase() + address.slice(1);
 
   addressPara.append(locationIcon, addressText);
@@ -50,14 +50,14 @@ const getCurrentConditionsContainer = ({ address, current }) => {
   const humidityPara = document.createElement("p");
   humidityPara.classList.add("humidity");
 
-  const humidityIcon = document.createElement('img');
+  const humidityIcon = document.createElement("img");
   humidityIcon.src = waterPercent;
-  humidityIcon.alt = 'Humidity Icon';
+  humidityIcon.alt = "Humidity Icon";
 
-  const humidityText = document.createElement('span');
+  const humidityText = document.createElement("span");
   humidityText.textContent = current.humidity;
 
-  humidityPara.append(humidityIcon,humidityText);
+  humidityPara.append(humidityIcon, humidityText);
 
   containerDiv.append(
     addressPara,
@@ -82,10 +82,10 @@ const getHoursForecastCard = ({ hours }) => {
     const datetimePara = document.createElement("p");
     datetimePara.classList.add("datetime");
 
-    const [h, m, s] = datetime.split(':');
+    const [h, m, s] = datetime.split(":");
     const dateObj = new Date();
     dateObj.setHours(h, m, s, 0);
-    datetimePara.textContent = format(dateObj, 'h:mm a');
+    datetimePara.textContent = format(dateObj, "h:mm a");
 
     const iconPara = document.createElement("p");
     iconPara.classList.add("icon");
@@ -104,11 +104,11 @@ const getHoursForecastCard = ({ hours }) => {
     const humidityPara = document.createElement("p");
     humidityPara.classList.add("humidity");
 
-    const humidityIcon = document.createElement('img');
+    const humidityIcon = document.createElement("img");
     humidityIcon.src = waterPercent;
-    humidityIcon.alt = 'Humidity Icon';
+    humidityIcon.alt = "Humidity Icon";
 
-    const humidityText = document.createElement('span');
+    const humidityText = document.createElement("span");
     humidityText.textContent = humidity;
 
     humidityPara.append(humidityIcon, humidityText);
@@ -131,19 +131,19 @@ const getWeekForecastContainer = ({ week }) => {
 
     const datetimePara = document.createElement("p");
     datetimePara.classList.add("datetime");
-    datetimePara.textContent = format(datetime, "EEEE"); 
+    datetimePara.textContent = format(datetime, "EEEE");
 
     const humidityPara = document.createElement("p");
     humidityPara.classList.add("humidity");
 
-    const humidityIcon = document.createElement('img');
+    const humidityIcon = document.createElement("img");
     humidityIcon.src = waterPercent;
-    humidityIcon.alt = 'Humidity Icon';
+    humidityIcon.alt = "Humidity Icon";
 
-    const humidityText = document.createElement('span');
+    const humidityText = document.createElement("span");
     humidityText.textContent = humidity;
 
-    humidityPara.append(humidityIcon,humidityText);
+    humidityPara.append(humidityIcon, humidityText);
 
     const iconPara = document.createElement("p");
     iconPara.classList.add("icon");

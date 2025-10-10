@@ -72,15 +72,15 @@ const processWeatherData = ({ address, currentConditions, days }) => {
 };
 
 export default async (loca) => {
-    const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${loca}?unitGroup=metric&key=W3MXMLU37J4EAJ5YRBBSGPPAZ&contentType=json`,
-    );
+  const response = await fetch(
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${loca}?unitGroup=metric&key=W3MXMLU37J4EAJ5YRBBSGPPAZ&contentType=json`,
+  );
 
-    if (!response.ok) throw new Error(`Status code: ${response.status}`);
+  if (!response.ok) throw new Error(`Status code: ${response.status}`);
 
-    const data = await response.json();
+  const data = await response.json();
 
-    console.log(data);
+  console.log(data);
 
-    return processWeatherData(data);
+  return processWeatherData(data);
 };
