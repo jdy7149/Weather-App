@@ -116,8 +116,8 @@
 
 .current .address img,
 .current .humidity img {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   vertical-align: middle;
   filter: invert(1) brightness(200%);
 }
@@ -141,7 +141,7 @@
 }
 
 .current .feelslike {
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-bottom: 0.25rem;
 }
 
@@ -222,8 +222,8 @@
 }
 
 .hours-forecast-card .humidity img {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   filter: invert(1);
 }
 
@@ -285,8 +285,8 @@
 }
 
 .week-forecast-card .humidity img {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   filter: invert(1);
 }
 
