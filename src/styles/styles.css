@@ -1,0 +1,295 @@
+:root {
+  --bg-color-gray: #f5f5f5;
+  --white: #fff;
+  --input-border-gray: #ccc; 
+  --input-placeholder: #999;    
+  --box-shadow-black: rgba(0, 0, 0, 0.15);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Searchbar div */
+.searchbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-color-gray);
+  padding: 16px;
+}
+
+.searchbar input[type="search"] {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--input-border-gray);           
+  border-radius: 8px;
+  background: var(--white);             
+  color: #333;                       
+  outline: none;
+  width: 220px;
+  transition: all 0.2s ease;
+}
+
+.searchbar input[type="search"]::placeholder {
+  color: var(--input-placeholder);                  
+}
+
+.searchbar input[type="search"]:focus {
+  border-color: #4facfe;              /* matches button accent */
+  box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.2);
+  background: var(--white);
+}
+
+.searchbar button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: var(--white);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.searchbar button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+}
+
+.searchbar button:active {
+  transform: translateY(0);
+}
+
+/* Content div */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 24px 0;
+  background: url('../image/sky-5907605_1280.jpg');
+  background-size: cover;
+}
+
+/* Current Conditions */
+.current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: var(--white);
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  width: 750px;
+  text-align: center;
+  box-shadow: 0 4px 12px var(--box-shadow-black);
+}
+
+.current .address {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.current .address,
+.current .humidity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.current .address img,
+.current .humidity img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  filter: invert(1) brightness(200%);
+}
+
+.current .temp {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.current .icon img {
+  width: 64px;
+  height: 64px;
+  margin: 0.5rem 0;
+}
+
+.current .conditions {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.current .feelslike {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.current .humidity {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Hours forecast */
+.hours-forecast {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  
+  /* top/bottom padding, left/right for peek */
+  padding: 1rem 1.5rem;            
+  
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1.5rem;  /* ensures snap respects left/right padding */
+  background-color: var(--bg-color-gray);
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0) rgba(0,0,0,0);
+}
+
+/* show scrollbar on hover */
+.hours-forecast:hover {
+  scrollbar-color: rgba(0,0,0,0.5) rgba(0,0,0,0.1);
+}
+
+.hours-forecast-card {
+  flex: 0 0 auto;        
+  min-width: 90px;       
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  text-align: center;
+  color: var(--white);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  transition: transform 0.2s ease, background 0.2s ease;
+  transform-origin: center;
+}
+
+.hours-forecast-card:hover {
+  transform: translateY(-6px) scale(1.05);
+}
+
+/* text & icons */
+.hours-forecast-card .datetime {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.hours-forecast-card .icon img {
+  width: 32px;
+  height: 32px;
+}
+
+.hours-forecast-card .temp {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.hours-forecast-card .humidity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  font-size: 0.85rem;
+}
+
+.hours-forecast-card .humidity img {
+  width: 16px;
+  height: 16px;
+  filter: invert(1);
+}
+
+/* WebKit scrollbar */
+.hours-forecast::-webkit-scrollbar {
+  height: 6px;
+}
+
+.hours-forecast::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.hours-forecast::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+/* Week forecast */
+.week-forecast {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color-gray);
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.week-forecast-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  color: var(--white);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.week-forecast-card:hover {
+  transform: translateY(-3px);
+}
+
+.week-forecast-card .datetime {
+  flex: 1;
+  font-size: 1.2rem;
+}
+
+.week-forecast-card .humidity {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 1rem;
+  min-width: 60px;
+  justify-content: center;
+}
+
+.week-forecast-card .humidity img {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
+}
+
+.week-forecast-card .icon img {
+  width: 32px;
+  height: 32px;
+}
+
+.week-forecast-card .tempmax,
+.week-forecast-card .tempmin {
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: right;
+  min-width: 40px;
+}
+
+.week-forecast-card .tempmin {
+  opacity: 0.7;
+  font-weight: 500;
+}
