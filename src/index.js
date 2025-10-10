@@ -1,7 +1,7 @@
-import "./reset.css";
-import "./styles.css";
+import "./styles/reset.css";
+import "./styles/styles.css";
 
-import populateContent, { searchInput, searchBtn } from "./populateContent";
+import populateContent, { searchInput, searchBtn } from "./scripts/populateContent";
 
 searchBtn.addEventListener("click", () => {
   const loca = searchInput.value;
