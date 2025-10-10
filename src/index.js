@@ -1,19 +1,28 @@
 import "./styles/reset.css";
 import "./styles/styles.css";
 
-import { populateContent, searchInput, searchBtn, displayLoading } from "./scripts/displayController";
+import { populateContent, searchForm, searchInput, displayLoading } from "./scripts/displayController";
 
-searchBtn.addEventListener("click", () => {
-  displayLoading();
+searchForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+
+  const loca = searchInput.value.trim();
   
-  const loca = searchInput.value;
+  searchInput.setCustomValidity('');
 
-  if (loca === "") {
-    window.alert("Please enter location.");
+  if (loca === '') {
+    searchInput.setCustomValidity('You must enter location.');
+    searchInput.reportValidity();
     return;
   }
+
+  displayLoading();
 
   populateContent(loca);
 
   searchInput.value = "";
+});
+
+searchInput.addEventListener('input', () => {
+  searchInput.setCustomValidity('');
 });
