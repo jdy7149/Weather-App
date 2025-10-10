@@ -5,8 +5,8 @@ import mapMarker from "../icons/map-marker.svg";
 
 import getWeather from "./getWeather";
 
+export const searchForm = document.querySelector('#searchForm');
 export const searchInput = document.querySelector("#location");
-export const searchBtn = document.querySelector("#search");
 const contentDiv = document.querySelector(".content");
 
 const getCurrentConditionsContainer = ({ address, current }) => {
@@ -175,7 +175,7 @@ export const displayLoading = () => {
   loadingDiv.id = 'loading'
   loadingDiv.textContent = 'Loading...';
 
-  contentDiv.appendChild(loadingDiv);
+  contentDiv.replaceChildren(loadingDiv);
 };
 
 export const populateContent = async (loca) => {
