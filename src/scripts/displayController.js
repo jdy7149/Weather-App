@@ -7,7 +7,8 @@ import getWeather from "./getWeather";
 
 export const searchForm = document.querySelector("#searchForm");
 export const searchInput = document.querySelector("#location");
-const contentDiv = document.querySelector(".content");
+const forecastDiv = document.querySelector(".forecast");
+const loadingDiv = document.querySelector("#loading");
 
 const getCurrentConditionsContainer = ({ address, current }) => {
   const containerDiv = document.createElement("div");
@@ -170,31 +171,32 @@ const getWeekForecastContainer = ({ week }) => {
   return containerDiv;
 };
 
-export const displayLoading = () => {
-  const loadingDiv = document.createElement("div");
-  loadingDiv.id = "loading";
-  loadingDiv.textContent = "Loading...";
+const hideLoading = () => {
+  loadingDiv.classList.add("hidden");
+  forecastDiv.classList.remove("hidden");
+};
 
-  contentDiv.replaceChildren(loadingDiv);
+export const displayLoading = () => {
+  loadingDiv.classList.remove("hidden");
+  forecastDiv.classList.add("hidden");
 };
 
 export const populateContent = async (loca) => {
   try {
     const data = await getWeather(loca);
 
-    console.log({ data });
-
     const currentConditionsCard = getCurrentConditionsContainer(data);
     const hoursForecastCard = getHoursForecastCard(data);
     const weekForecastCard = getWeekForecastContainer(data);
 
-    contentDiv.replaceChildren(
+    forecastDiv.replaceChildren(
       currentConditionsCard,
       hoursForecastCard,
       weekForecastCard,
     );
   } catch (error) {
     window.alert(error.message);
-    contentDiv.replaceChildren();
+  } finally {
+    hideLoading();
   }
 };
