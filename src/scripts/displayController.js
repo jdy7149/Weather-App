@@ -5,7 +5,7 @@ import mapMarker from "../icons/map-marker.svg";
 
 import getWeather from "./getWeather";
 
-export const searchForm = document.querySelector('#searchForm');
+export const searchForm = document.querySelector("#searchForm");
 export const searchInput = document.querySelector("#location");
 const contentDiv = document.querySelector(".content");
 
@@ -171,9 +171,9 @@ const getWeekForecastContainer = ({ week }) => {
 };
 
 export const displayLoading = () => {
-  const loadingDiv = document.createElement('div');
-  loadingDiv.id = 'loading'
-  loadingDiv.textContent = 'Loading...';
+  const loadingDiv = document.createElement("div");
+  loadingDiv.id = "loading";
+  loadingDiv.textContent = "Loading...";
 
   contentDiv.replaceChildren(loadingDiv);
 };
@@ -181,13 +181,13 @@ export const displayLoading = () => {
 export const populateContent = async (loca) => {
   try {
     const data = await getWeather(loca);
-  
+
     console.log({ data });
-  
+
     const currentConditionsCard = getCurrentConditionsContainer(data);
     const hoursForecastCard = getHoursForecastCard(data);
     const weekForecastCard = getWeekForecastContainer(data);
-  
+
     contentDiv.replaceChildren(
       currentConditionsCard,
       hoursForecastCard,
