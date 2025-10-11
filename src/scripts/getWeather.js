@@ -39,14 +39,12 @@ const processDailyData = ({
   datetime,
   humidity,
   icon,
-  temp,
   tempmax,
   tempmin,
 }) => ({
   datetime,
   humidity,
   icon,
-  temp,
   tempmax,
   tempmin,
 });
