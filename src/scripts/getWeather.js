@@ -1,4 +1,4 @@
-import { format, compareAsc } from "date-fns";
+import { format } from "date-fns";
 
 const processCurrentConditions = ({
   conditions,
@@ -25,7 +25,7 @@ const getNext24Hours = (todayHours, tomorrowHours) => {
   const now = new Date();
 
   const processedTodayHours = todayHours.filter(
-    ({ datetime }) => compareAsc(datetime, format(now, "HH:mm:ss")) >= 0,
+    ({ datetime }) => datetime >= format(now, "HH:mm:ss"),
   );
   const processedTomorrowHours = tomorrowHours.slice(
     0,
