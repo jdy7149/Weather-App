@@ -24,7 +24,7 @@
   padding: 16px;
 }
 
-.searchbar input[type="search"] {
+.searchbar input[type='search'] {
   padding: 0.6rem 1rem;
   font-size: 1rem;
   border: 1px solid var(--input-border-gray);
@@ -36,11 +36,11 @@
   transition: all 0.2s ease;
 }
 
-.searchbar input[type="search"]::placeholder {
+.searchbar input[type='search']::placeholder {
   color: var(--input-placeholder-gray);
 }
 
-.searchbar input[type="search"]:focus {
+.searchbar input[type='search']:focus {
   border-color: var(--input-focus-skyblue); /* matches button accent */
   box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.2);
   background: var(--white);
@@ -73,7 +73,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: url("../image/sky-5907605_1280.jpg") center/cover no-repeat;
+  background: url('../image/sky-5907605_1280.jpg') center/cover no-repeat;
 }
 
 /* Forecast */

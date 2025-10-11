@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format } from 'date-fns';
 
 const processCurrentConditions = ({
   conditions,
@@ -25,7 +25,7 @@ const getNext24Hours = (todayHours, tomorrowHours) => {
   const now = new Date();
 
   const processedTodayHours = todayHours.filter(
-    ({ datetime }) => datetime >= format(now, "HH:mm:ss"),
+    ({ datetime }) => datetime >= format(now, 'HH:mm:ss'),
   );
   const processedTomorrowHours = tomorrowHours.slice(
     0,
@@ -35,13 +35,7 @@ const getNext24Hours = (todayHours, tomorrowHours) => {
   return [...processedTodayHours, ...processedTomorrowHours];
 };
 
-const processDailyData = ({
-  datetime,
-  humidity,
-  icon,
-  tempmax,
-  tempmin,
-}) => ({
+const processDailyData = ({ datetime, humidity, icon, tempmax, tempmin }) => ({
   datetime,
   humidity,
   icon,
